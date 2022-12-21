@@ -7,34 +7,56 @@
     android:background="@drawable/dice_background"
     tools:context=".fragments.DiceGameFragment">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="38dp"
+        android:fontFamily="@font/caesar_dressing"
+        android:text="@string/shake_it"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="70sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/diceBlackIV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/diceBlackIV"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginBottom="70dp"
+        android:contentDescription="@string/black_dice"
         android:src="@drawable/dice_black_6"
+        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="154dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="#CFA013"
+        android:layout_height="7dp"
+        android:layout_marginBottom="70dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/diceRedIV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="379dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/diceRedIV"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginBottom="51dp"
         android:src="@drawable/dice_red_6"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="459dp" />
-
+        android:contentDescription="@string/red_dice" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
