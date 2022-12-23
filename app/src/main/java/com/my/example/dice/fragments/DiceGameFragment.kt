@@ -6,8 +6,10 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.my.example.dice.R
 import com.my.example.dice.databinding.FragmentDiceGameBinding
 import java.util.*
@@ -26,7 +28,7 @@ class DiceGameFragment : Fragment(R.layout.fragment_dice_game) {
         binding = FragmentDiceGameBinding.bind(view)
 
         sensorManager = requireContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        Objects.requireNonNull(sensorManager)!!.registerListener(
+        Objects.requireNonNull(sensorManager!!).registerListener(
             sensorListener, sensorManager!!
                 .getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL
         )
@@ -54,6 +56,44 @@ class DiceGameFragment : Fragment(R.layout.fragment_dice_game) {
     }
 
     private fun throwTheDice() {
-        TODO("Not yet implemented")
+        val diceBlack: Int = randomDiceNumber()
+        val diceRed: Int = randomDiceNumber()
+
+        val blackResult = getResult("black", diceBlack)
+        val redResult = getResult("red", diceRed)
+
+        binding.diceBlackIV.setImageResource(blackResult)
+        binding.diceRedIV.setImageResource(redResult)
+
+        if (diceBlack > diceRed) {
+            setResultText("Dark Side \nWin!")
+        } else if (diceBlack < diceRed) {
+            setResultText("Light Side \nWin!")
+        } else if (diceBlack == diceRed) {
+            setResultText("Draw! \nShake Again!")
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            requireActivity(), object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().popBackStack()
+                }
+            }
+        )
+    }
+
+    private fun setResultText(message: String) {
+        binding.titleTV.text = message
+    }
+
+    private fun getResult(side: String, diceNumber: Int): Int {
+        return resources.getIdentifier(
+            "dice_$side" + "_$diceNumber",
+            "drawable", "com.my.example.dice"
+        )
+    }
+
+    private fun randomDiceNumber(): Int {
+        return Random().nextInt(6) + 1
     }
 }

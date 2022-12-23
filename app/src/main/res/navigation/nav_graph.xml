@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/gameMenuFragment">
 
+    <fragment
+        android:id="@+id/gameMenuFragment"
+        android:name="com.my.example.dice.fragments.GameMenuFragment"
+        android:label="fragment_game_menu"
+        tools:layout="@layout/fragment_game_menu" >
+        <action
+            android:id="@+id/action_gameMenuFragment_to_diceGameFragment"
+            app:destination="@id/diceGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/diceGameFragment"
+        android:name="com.my.example.dice.fragments.DiceGameFragment"
+        android:label="fragment_dice_game"
+        tools:layout="@layout/fragment_dice_game" />
+    <fragment
+        android:id="@+id/initFragment"
+        android:name="com.my.example.dice.fragments.InitFragment"
+        android:label="fragment_init"
+        tools:layout="@layout/fragment_init" >
+        <action
+            android:id="@+id/action_initFragment_to_shakeFragment"
+            app:destination="@id/shakeFragment"
+            app:popUpTo="@id/initFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shakeFragment"
+        android:name="com.my.example.dice.fragments.ShakeFragment"
+        android:label="fragment_shake"
+        tools:layout="@layout/fragment_shake" />
 </navigation>
