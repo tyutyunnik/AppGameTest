@@ -25,6 +25,24 @@ class InitFragment : Fragment(R.layout.fragment_init) {
         firstOne = shaPr.getBoolean("firstOne", true)
         lnk = shaPr.getString("lnk", "").toString()
 
-
+        if (firstOne) {
+            if (isDiceOnline(requireContext())) {
+                if (isBot(requireContext())) {
+                    shaPr.edit().putBoolean("firstOne", false).apply()
+                    startDiceGame()
+                } else {
+                    onlineInit()
+                }
+            } else {
+                shaPr.edit().putBoolean("firstOne", false).apply()
+                startDiceGame()
+            }
+        } else {
+            if (lnk.isNotEmpty()) {
+                startShake()
+            } else {
+                startDiceGame()
+            }
+        }
     }
 }
